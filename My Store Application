@@ -1,0 +1,68 @@
+public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        // Define the products and their prices
+        String[] products = {"T-Shirt", "Jeans", "Shoes", "Jacket", "Hat"};
+        double[] prices = {25.00, 35.00, 15.00, 45.00, 8.00};
+
+        boolean continueShopping = true;
+        while (continueShopping) {
+            double total = 0.0;
+
+            System.out.println("\nWelcome to the Store!");
+            System.out.println("Please select the items you would like to purchase:");
+
+            // Display the products and prices
+            for (int i = 0; i < products.length; i++) {
+                System.out.printf("%d. %s - $%.2f\n", i + 1, products[i], prices[i]);
+            }
+
+            // Allow the customer to choose multiple items and enter the quantity
+            while (true) {
+                System.out.print("\nEnter the number of the item you would like to purchase (or 0 to finish): ");
+                int itemChoice = scanner.nextInt();
+
+                if (itemChoice == 0) {
+                    break;
+                } else if (itemChoice < 1 || itemChoice > products.length) {
+                    System.out.println("Invalid choice. Please try again.");
+                    continue;
+                }
+
+                System.out.print("How many would you like to buy? ");
+                int quantity = scanner.nextInt();
+
+                double itemTotal = prices[itemChoice - 1] * quantity;
+                total += itemTotal;
+
+                System.out.printf("Added %d %s at $%.2f each. Total so far: $%.2f\n",
+                                  quantity, products[itemChoice - 1], prices[itemChoice - 1], total);
+            }
+
+            System.out.printf("\nYour total is $%.2f\n", total);
+
+            // Accept cash input from the customer and compute the change
+            double payment;
+            while (true) {
+                System.out.print("Please enter the amount you are paying: ");
+                payment = scanner.nextDouble();
+
+                if (payment >= total) {
+                    break;
+                } else {
+                    System.out.println("The amount provided is insufficient. Please try again.");
+                }
+            }
+
+            double change = payment - total;
+            System.out.printf("Your change is $%.2f\n", change);
+
+            // Ask the customer if they want to make another purchase
+            System.out.print("\nDo you want to make another purchase? (y/n) ");
+            String response = scanner.next();
+            continueShopping = response.equalsIgnoreCase("y");
+        }
+
+        System.out.println("\nThank you for shopping with us. Goodbye!");
+    }
+}
