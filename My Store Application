@@ -41,7 +41,6 @@ public static void main(String[] args) {
 
             System.out.printf("\nYour total is $%.2f\n", total);
 
-            // Accept cash input from the customer and compute the change
             double payment;
             while (true) {
                 System.out.print("Please enter the amount you are paying: ");
